@@ -1,0 +1,56 @@
+# Kada se nadje vozilo/inventory item, prijavi problem u konzoli, opise  ga i ispise ID problematicnog vozila/inventory itema, vrednost donje granice, fakticku vrednost koja je nadjena i iznos odstupanja.
+# Ne resavaj ceo problem, nego ga razlozi na manje probleme i resavaj manje.
+
+
+
+import requests
+import json
+
+basic_URL=requests.get('http://combined-media.cars.data.vast.com/listings/-/cars?apikey=94012091314113802171541191315124&light=y&start_index=1&max_results=15&range=25&strip_extra=y&include=leads_schema&vehicle_condition=Used%2CCPO&tlocation=10301&wt=json')
+json_data=json.loads(basic_URL.text)
+
+sviListinzi = json_data['results']['data']
+vrednostDistanceParametra = 25
+Lista=[]
+
+for pojedinacni_listing in sviListinzi:
+    Potrebni_podaci={}
+    if 'id' in pojedinacni_listing:
+        Potrebni_podaci['id'] = pojedinacni_listing['id']
+    if 'location' in pojedinacni_listing:
+        if 'distance' in pojedinacni_listing['location']:
+            Potrebni_podaci['distance'] = pojedinacni_listing['location']['distance']
+    Lista.append(Potrebni_podaci)
+
+print(Lista)
+
+# newlist=[]                       #make an empty list
+# for i in Lista:                   # loop to hv a dict in list
+#     s={}                          # make an empty dict to store new dict data
+#     for k in i.keys():            # to get keys in the dict of the list
+#         s[k]=int(i[k])        # change the values from string to int by int func
+#     newlist.append(s)
+# print(newlist)
+
+na_kurac = []
+
+# for recnik in Lista:
+#     s = {}
+#     for kljuc, vrednost in recnik.items():
+#         if kljuc=='distance':
+#             if vrednost > 5:
+#                 s['distance'] = Lista['distance']
+#     na_kurac.append(s)
+
+for recnik in Lista:
+    for key, value in recnik.items():
+        if key == 'distance':
+            if value > vrednostDistanceParametra :
+                print('Za vozilo ID: ' + recnik['id'] + ' ima greske. Nadjena je vrednost parametra distance = ' + str(recnik['distance']) + ', a trazena je do '+ str(vrednostDistanceParametra) +' milja. Razlika je ' + (str('{0:.3g}'.format(recnik['distance']-5))) + '.' )
+            else:
+                print('Za vozilo ID: ' + recnik['id'] +', Vrednosti parametra distance su OK.')
+
+
+# p1 = { key:value for key, value in Lista.items() if value > 200 }
+#
+# print(p1)
