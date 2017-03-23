@@ -1,10 +1,21 @@
 import git_testiranje from milan_git
 
+hocu konflikt
+hocu konflikt
 
-menjam
-menjam
-kenjam
-sanjam
+hocu konflikt
+
+hocu konflikt
+
+hocu konflikt
+hocu konflikt
+hocu konflikt
+hocu konflikt
+hocu konflikt
+hocu konflikt
+hocu konflikt
+hocu konflikt
+hocu konflikt
 
 
 print test
