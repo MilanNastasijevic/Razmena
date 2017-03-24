@@ -28,9 +28,8 @@ dule dule
 dule dule
 
 milan milan
-
-
 musa musa
+prase prase
 
 
 print test
