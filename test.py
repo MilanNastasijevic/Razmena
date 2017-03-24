@@ -10,4 +10,6 @@ dule dule
 
 musa musa
 
+prase prase
+
 print test
